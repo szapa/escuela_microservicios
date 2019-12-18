@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.lang.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Usuario implements Serializable {
@@ -32,16 +36,25 @@ public class Usuario implements Serializable {
 	@NonNull
 	@Size(min = 3, max = 500)
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+	@Column(unique = true)
 	private String email;
 	
 	// Información específica de la columna en la bbdd
 	@Column(name = "timestamp", nullable = false, updatable = false,
-			insertable = false, columnDefinition = "TIMESTAMP")
+			insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
 	
 	@Size(min = 2, max = 500)
 	private String password;
+	
+	@Column(name = "id_tema_preferido", nullable = true, insertable = true, updatable = true)
+	private Integer idTemaPreferido;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "id_tema_preferido", referencedColumnName = "id",  nullable = true, insertable = false, updatable = false)
+	@JsonProperty("preferido_tema")
+	private Tema temaPreferido;
 	
 	public Usuario(Integer id, String nombre, String email, String password) {
 		super();
@@ -80,6 +93,28 @@ public class Usuario implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public Integer getIdTemaPreferido() {
+		return idTemaPreferido;
+	}
+	public void setIdTemaPreferido(Integer idTemaPreferido) {
+		this.idTemaPreferido = idTemaPreferido;
+	}
+	public Date getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
+	public Tema getTemaPreferido() {
+		return temaPreferido;
+	}
+
+	public void setTemaPreferido(Tema tema) {
+		this.temaPreferido = tema;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
