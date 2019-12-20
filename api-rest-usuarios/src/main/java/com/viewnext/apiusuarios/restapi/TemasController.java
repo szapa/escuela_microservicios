@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viewnext.apiusuarios.entidades.Tema;
@@ -35,8 +36,14 @@ public class TemasController {
 	}
 	
 	@GetMapping
-	public List<Tema>listarTemas() {
-		return daoTemas.findAll();
+	public List<Tema>listarTemas(@RequestParam(name = "usuario", required = false) Integer idUsuario) {
+		List<Tema> temas;
+		if (idUsuario==null) {
+			temas = daoTemas.findAll();
+		} else {
+			temas = daoTemas.findTemasPorUsuario(idUsuario);
+		}
+		return temas;
 	}
 	
 	@DeleteMapping("{id}")
@@ -64,4 +71,5 @@ public class TemasController {
 	public List<Tema> crearListado(@RequestBody List<Tema> listTemas) {
 		return daoTemas.saveAll(listTemas);
 	}
+	
 }

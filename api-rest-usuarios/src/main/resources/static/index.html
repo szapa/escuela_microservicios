@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	Formulario registro
+	<form name="formReg" action="/api/main/usuarios/form" method="post">
+		<label for="name">Nombre:</label>
+		<input name="name" placeholder="name"/>
+		<br>
+		<label for="email">Email:</label>
+		<input name="email" type="email" placeholder="Uno válido, por favor">
+		<br>
+		<label for="password">Contraseña:</label>
+		<input name="password" type="password">
+		<br>
+		<label for="temaPreferido">Tema preferido:</label>
+		<select name="temaPreferido">
+			<option value="1">Deporte</option>
+			<option value="2">Culturilla</option>
+			<option value="3">Politica</option>
+		</select>
+		<select name="api">
+			<option value="json">Al microservicio JSON</option>
+			<option value="xml">Al microservicio XML</option>
+		</select>
+		<br>
+		<input type="reset" value="Limpiar"/>
+		<input type="submit" value="Enviar">
+		<input type="button" value="Enviar por Ajax (si da tiempo)">
+	</form>
+</body>
+</html>
