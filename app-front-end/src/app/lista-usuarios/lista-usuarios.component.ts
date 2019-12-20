@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from '../usuarios.service';
+import { Usuario } from '../entidades/Usuario';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaUsuariosComponent implements OnInit {
 
-  constructor() { }
+  listaUsu: Usuario[];
+  // Como UsuarioService es @Injectable, Angular lo instancia y lo
+  // pasa como argumento del contructor automáticamente. IoD
+  // Inyección de dependencias
+  constructor(public srvUsu: UsuariosService) { }
 
   ngOnInit() {
+    this.listaUsu = this.srvUsu.getTodosUsuarios();
   }
 
 }

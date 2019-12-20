@@ -1,2 +1,7 @@
-<p>lista-usuarios works!</p>
-<h2</h2>
+<h3>lista-usuarios works!</h3>
+<ul>
+    <li *ngFor="let usu of listaUsu">
+        <label>Datos:</label>
+        {{usu.id + ", " + usu.nombre + " - " + usu.email}}
+    </li>
+</ul>
