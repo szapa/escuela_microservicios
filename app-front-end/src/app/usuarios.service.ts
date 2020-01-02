@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from './entidades/Usuario';
+import { AlmacenLocalService } from './almacen-local.service';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
   listaUsuario: Usuario[];
-  constructor() {
+  constructor(public almSrv: AlmacenLocalService) {
     this.listaUsuario= [{
       id: 1, 
       nombre: "Pako", 
@@ -21,8 +23,19 @@ export class UsuariosService {
       idTemaPreferido: 2
     }
     ];
+    this.listaUsuario = almSrv.leer("usuarios");
    }
    public getTodosUsuarios():Usuario[]{
+      this.listaUsuario.push({
+        id: this.listaUsuario.length, 
+        nombre: "Pako add" + this.listaUsuario.length, 
+        email: "pak@em.com", 
+        password: "123", 
+        idTemaPreferido: 1 
+      })
+      
+      this.almSrv.guardar("usuarios",this.listaUsuario);
+      
       return this.listaUsuario;
    }
 }
