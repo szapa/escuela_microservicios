@@ -1,7 +1,18 @@
 <h3>lista-usuarios works!</h3>
 <ul>
-    <li *ngFor="let usu of listaUsu">
+    <li *ngFor="let usu of listaUsu; let i = index">
         <label>Datos:</label>
         {{usu.id + ", " + usu.nombre + " - " + usu.email}}
+        <input type="button" value="Modificar registro" (click)="seModifica = true; usuModif=usu">
+        <input type="button" value="Eliminar" (click)="eliminarUsuario(usu.id)">
     </li>
+</ul>
+<ul>
+    {{seModifica}}
+    <div *ngIf="seModifica">
+        <input type="text" [(ngModel)]="usuModif.id">
+        <input type="text" [(ngModel)]="usuModif.nombre">
+        <input type="text" [(ngModel)]="usuModif.email">
+        <input type="button" value="Modificar registro2" (click)="modificarUsuario(usuModif.id,usuModif)">
+    </div>
 </ul>

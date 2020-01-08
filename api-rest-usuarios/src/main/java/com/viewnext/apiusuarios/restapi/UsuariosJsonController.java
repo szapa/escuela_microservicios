@@ -25,7 +25,7 @@ import com.viewnext.apiusuarios.model.AlmacenDAOUsuarios;
 
 @RestController()
 @RequestMapping("/api/json/usuarios")
-@CrossOrigin()
+@CrossOrigin(origins = "*")
 public class UsuariosJsonController {
 
 	@Autowired
@@ -55,7 +55,8 @@ public class UsuariosJsonController {
 	
 	@DeleteMapping(value = "/{id}")
 	public void deleteUsuario(@PathVariable Integer id) {
-		 dao.deleteById(id);
+		daoTemasUsu.deleteByUsuario(id);
+		dao.deleteById(id);
 	}
 	
 	@DeleteMapping()

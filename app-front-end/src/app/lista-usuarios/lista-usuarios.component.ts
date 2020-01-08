@@ -16,6 +16,9 @@ export class ListaUsuariosComponent implements OnInit {
   // Como UsuarioService es @Injectable, Angular lo instancia y lo
   // pasa como argumento del contructor automáticamente. IoD
   // Inyección de dependencias. Esto es como el @Autowired
+
+  seModifica: boolean = false;
+
   constructor(srvUsu: UsuariosRestService) {
     this.srvUsu = srvUsu;
    }
@@ -27,4 +30,21 @@ export class ListaUsuariosComponent implements OnInit {
     obserConDatos.subscribe( datos => this.listaUsu = datos);
   }
 
+  modificarUsuario(indice: number, usuario: Usuario){
+    this.srvUsu.modificarRegistro(indice, usuario).subscribe((usuRecibMod) => {
+      this.ngOnInit();
+    })
+  }
+
+  eliminarUsuario(id: number){
+    this.srvUsu.eliminarRegistro(id).subscribe(() => {
+      alert(`Usuario con id ${id} eliminado`);
+      this.ngOnInit();
+    });
+    
+  };
+
+  mostrarFormulario(){
+
+  }
 }

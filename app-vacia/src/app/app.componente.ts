@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponente {
 
+    contador = 0;
+    ngOnInit(){
+        this.contador = 7;
+    }
+
+    alPulsarBtn(){
+        this.contador ++;
+        console.log("Contador = " + this.contador);
+    }
 }
