@@ -1,17 +1,15 @@
-<input type="text" [(ngModel)]="usuario.nombre" value="Nombre por defecto"/>
-<input type="email" [(ngModel)]="usuario.email" value="email@email.com"/>
-<input type="text" [(ngModel)]="usuario.password" value="1234"/>
-<br>{{ "Enviar" + usuario.nombre + "-" + usuario.password }}
-<input type="button" value="Enviar datos"(click) =  "enviarDatos()"/>
-
-<div *ngIf="estaRegistrado">Ya se ha registrado</div>
-<div *ngIf="!estaRegistrado">Aún no se ha registrado</div>
-
-
-<!-- <p>registro-usuario works!</p>
-{{ variable }}
-{{ variable }}
-
-<input type="text" [(ngModel)]="variable"/>
-
-<input type="button" value="Boton" (click) = "pulsar()"/> -->
+<div>
+    <label for="name">Nombre: </label>
+    <input type="text" [(ngModel)]="usuario.nombre" value="Nombre por defecto"/>
+    <br>
+    <label for="email">Email: </label>
+    <input type="email" [(ngModel)]="usuario.email" value="email@email.com"/>
+    <br>
+    <label for="password">Password: </label>
+    <input type="text" [(ngModel)]="usuario.password" value="1234"/>
+    <br>{{ "Enviar" + usuario.nombre + "-" + usuario.password }}
+    <input type="button" value="Enviar datos"(click) =  "enviarDatos()"/>
+    
+    <div *ngIf="estaRegistrado">Ya se ha registrado</div>
+    <div *ngIf="!estaRegistrado">Aún no se ha registrado</div>
+</div>
