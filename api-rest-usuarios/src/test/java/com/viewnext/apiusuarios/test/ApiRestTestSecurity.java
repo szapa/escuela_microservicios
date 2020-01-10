@@ -23,10 +23,10 @@ public class ApiRestTestSecurity {
 	@Test
 	public void crearUsuario() {
 		Usuario usu = new Usuario();
-		usu.setNombre("ESCROTO MAN");
+		usu.setNombre("Esta noche frenadol-cola (soy javi)");
 		String passEncript = encoder.encode("321");
 		usu.setPassword(passEncript);
-		usu.setEmail("escroto@email.com");
+		usu.setEmail("frenadol@soyjavi.com");
 		Usuario usuGuard = daoUsu.save(usu);
 		
 		assertEquals(usuGuard.getEmail(), usu.getPassword());

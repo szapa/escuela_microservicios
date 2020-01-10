@@ -3,6 +3,7 @@ import { AlmacenLocalService } from './almacen-local.service';
 import { Usuario } from './entidades/Usuario';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { url } from 'inspector';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UsuariosRestService {
 
   url = "http://localhost:8081/api/json/usuarios";
+  urlBase = "";
   listaUsuario: Usuario[];
 
   constructor(
@@ -32,5 +34,13 @@ export class UsuariosRestService {
 
   modificarRegistro(indice: number, usuario: Usuario): Observable<Usuario>{
     return this.clienteHttp.put<Usuario>(`${this.url}/${indice}`, usuario);
+  }
+
+  autenticar(usuario: Usuario, callback){
+    const cabeceras = new HttpHeaders(
+      usuario ? {
+      authorization: 'Basic ' + btoa(usuario.nombre + ":" + usuario.password)
+    }:{})
+    this.clienteHttp.get(url)
   }
 }
